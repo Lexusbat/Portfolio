@@ -15,7 +15,7 @@ const Hero = () => {
         text-center
         px-6
         overflow-hidden
-        bg-[#05050a]
+        
       "
     >
 
@@ -26,6 +26,7 @@ const Hero = () => {
           inset-0
           bg-cover
           bg-center
+          fixed
         "
         style={{ backgroundImage: `url(${heroImage})` }}
       />

@@ -2,7 +2,18 @@ import { projects } from '../data/projects'
 
 const Projects = () => {
   return (
-    <section id="projects">
+    <section id="projects"  className="
+        relative
+        min-h-screen
+        flex
+        flex-col
+        items-center
+        justify-center
+        text-center
+        px-6
+        overflow-hidden
+        bg-[#161C30]
+      ">
       <p>03 / PROJECTS</p>
 
       <h2>Selected Work</h2>

@@ -1,6 +1,17 @@
 const Contact = () => {
   return (
-    <section id="contact">
+    <section id="contact"  className="
+        relative
+        min-h-screen
+        flex
+        flex-col
+        items-center
+        justify-center
+        text-center
+        px-6
+        overflow-hidden
+        bg-[#161C30]
+      ">
       <p>06 / CONTACT</p>
 
       <h2>Send a Transmission</h2>
