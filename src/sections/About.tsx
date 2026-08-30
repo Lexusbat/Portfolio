@@ -10,7 +10,7 @@ const About = () => {
         text-center
         px-6
         overflow-hidden
-        bg-[#161C30]
+        bg-[#0A0B14]
       ">
       <p>01 / ABOUT</p>
 
