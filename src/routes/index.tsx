@@ -1,9 +1,7 @@
 // src/routes/index.tsx
 
 import { createFileRoute } from "@tanstack/react-router";
-import { LabScene } from "../sections/Skills";   // capital S — matches Skills.tsx
-import { labObjects } from "../data/skills";     // lowercase — matches skills.ts
-
+import { LabScene } from "../sections/Skills";   
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [

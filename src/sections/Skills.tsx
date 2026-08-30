@@ -8,7 +8,23 @@ export function LabScene() {
   const [active, setActive] = useState<LabObject | null>(null);
 
   return (
-    <div className="relative w-full overflow-hidden rounded-lg border border-border shadow-[var(--shadow-panel)]">
+    <div className="relative w-full overflow-hidden rounded-lg bg-black ">
+        <h1
+          className="
+            font-sans
+            font-black
+            leading-[0.95]
+            text-[#fbfaf6]
+            text-5xl
+            sm:text-7xl
+            lg:text-8xl
+            mb-12
+            p-12
+            [text-shadow:0_0_40px_rgba(160,130,255,0.35)]
+          "
+        >
+        My Tech Stack
+        </h1>
       <img
         src={labBg}
         alt="Pixel art alchemy laboratory at night with glowing purple glassware"
