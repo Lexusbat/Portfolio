@@ -1,1 +1,56 @@
 @import "tailwindcss";
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+}
+
+:root {
+  --background: oklch(0.16 0.06 285);
+  --foreground: oklch(0.94 0.03 300);
+  --card: oklch(0.21 0.08 288 / 0.88);
+  --card-foreground: oklch(0.95 0.03 300);
+  --primary: oklch(0.68 0.26 305);
+  --primary-foreground: oklch(0.14 0.05 285);
+  --muted: oklch(0.26 0.07 282);
+  --muted-foreground: oklch(0.74 0.06 295);
+  --accent: oklch(0.78 0.17 200);
+  --border: oklch(0.45 0.14 300 / 0.45);
+
+  --glow-primary: 0 0 24px oklch(0.68 0.26 305 / 0.65);
+  --shadow-panel: 0 18px 50px oklch(0.08 0.05 285 / 0.75);
+}
+
+@utility panel-arcane {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-panel);
+  backdrop-filter: blur(10px);
+}
+
+@utility glow-text {
+  text-shadow: var(--glow-primary);
+}
+
+@utility hotspot-ring {
+  box-shadow: var(--glow-primary), inset 0 0 18px oklch(0.68 0.26 305 / 0.35);
+  border: 1px solid oklch(0.8 0.2 305 / 0.8);
+  background-color: oklch(0.68 0.26 305 / 0.12);
+}
+
+@utility pixelated {
+  image-rendering: pixelated;
+}
