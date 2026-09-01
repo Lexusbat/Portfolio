@@ -1,56 +1,913 @@
+/* ============================================================
+   GOTHIC FANTASY PIXEL-ART PORTFOLIO — DESIGN SYSTEM
+   ============================================================ */
+
 @import "tailwindcss";
-@import "tailwindcss" ;
 @source "../src";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-border: var(--border);
+/* ============================================================
+   FONT FACES
+   ============================================================ */
+
+@font-face {
+  font-family: "Namesake";
+  src: url("./assets/fonts/NamesakeNF.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: "Gulzar";
+  src: url("./assets/fonts/Gulzar-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================================
+   TAILWIND THEME
+   ============================================================ */
+
+@theme inline {
+  /* --- Palette --- */
+  --color-amber:    #F5A94E;
+  --color-turquoise:#4DD9C0;
+  --color-magenta:  #E0339E;
+  --color-navy:     #161C30;
+  --color-blue:     #1A3B52;
+  --color-purple:   #4A2669;
+
+  /* --- Semantic surface roles --- */
+  --color-background:        #161C30;
+  --color-surface:           #1A3B52;
+  --color-depth:             #4A2669;
+  --color-foreground:        #EDE8DC;
+  --color-muted:             #8A96A8;
+  --color-accent-primary:    #F5A94E;
+  --color-accent-tech:       #4DD9C0;
+  --color-accent-special:    #E0339E;
+
+  /* --- Semantic aliases for existing utilities --- */
+  --color-card:              rgba(26, 59, 82, 0.88);
+  --color-card-foreground:   #EDE8DC;
+  --color-primary:           #F5A94E;
+  --color-primary-foreground:#161C30;
+  --color-muted-foreground:  #8A96A8;
+  --color-accent:            #4DD9C0;
+  --color-border:            rgba(77, 217, 192, 0.18);
+
+  /* --- Font families --- */
+  --font-display:  "Namesake", serif;
+  --font-gulzar:   "Gulzar", serif;
+  --font-body:     "Inter", system-ui, sans-serif;
+
+  /* --- Spacing scale (section rhythm) --- */
+  --section-padding-y: 7rem;
+  --section-padding-x: 1.5rem;
+
+  /* --- Grid --- */
+  --grid-cols: 8;
+  --grid-gap:  1.5rem;
+  --grid-max:  1280px;
+
+  /* --- Radius --- */
+  --radius-px: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  /* --- Transitions --- */
+  --transition-base: 200ms ease;
+  --transition-slow: 400ms ease;
+}
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES (runtime)
+   ============================================================ */
 
 :root {
-  --background: oklch(0.16 0.06 285);
-  --foreground: oklch(0.94 0.03 300);
-  --card: oklch(0.21 0.08 288 / 0.88);
-  --card-foreground: oklch(0.95 0.03 300);
-  --primary: oklch(0.68 0.26 305);
-  --primary-foreground: oklch(0.14 0.05 285);
-  --muted: oklch(0.26 0.07 282);
-  --muted-foreground: oklch(0.74 0.06 295);
-  --accent: oklch(0.78 0.17 200);
-  --border: oklch(0.45 0.14 300 / 0.45);
+  /* Glow / shadow tokens */
+  --glow-amber:     0 0 28px rgba(245, 169, 78, 0.50);
+  --glow-turquoise: 0 0 28px rgba(77, 217, 192, 0.45);
+  --glow-magenta:   0 0 28px rgba(224, 51, 158, 0.50);
+  --glow-primary:   0 0 24px rgba(245, 169, 78, 0.55);
+  --shadow-panel:   0 16px 48px rgba(10, 12, 22, 0.80);
+  --shadow-deep:    0 4px 24px rgba(10, 12, 22, 0.60);
 
-  --glow-primary: 0 0 24px oklch(0.68 0.26 305 / 0.65);
-  --shadow-panel: 0 18px 50px oklch(0.08 0.05 285 / 0.75);
+  /* Pixel-border gradient — amber */
+  --pixel-border-amber: rgba(245, 169, 78, 0.40);
+  --pixel-border-tech:  rgba(77, 217, 192, 0.30);
 }
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   BASE RESET & GLOBAL
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #161C30;
+  color: #EDE8DC;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   TYPOGRAPHY SCALE
+   ============================================================ */
+
+/* Display — Namesake */
+.text-display-hero {
+  font-family: "Namesake", serif;
+  font-size: clamp(3.5rem, 9vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.text-display-xl {
+  font-family: "Namesake", serif;
+  font-size: clamp(2.75rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+.text-display-lg {
+  font-family: "Namesake", serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+}
+
+.text-display-md {
+  font-family: "Namesake", serif;
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  line-height: 1.1;
+}
+
+/* Gulzar — subheadings & supporting */
+.text-gulzar-xl {
+  font-family: "Gulzar", serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.4;
+}
+
+.text-gulzar-lg {
+  font-family: "Gulzar", serif;
+  font-size: clamp(1.1rem, 2vw, 1.375rem);
+  line-height: 1.45;
+}
+
+.text-gulzar-md {
+  font-family: "Gulzar", serif;
+  font-size: clamp(0.95rem, 1.5vw, 1.125rem);
+  line-height: 1.55;
+}
+
+/* Body — Inter */
+.text-body-lg {
+  font-family: "Inter", sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.text-body {
+  font-family: "Inter", sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  font-weight: 400;
+}
+
+.text-body-sm {
+  font-family: "Inter", sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.text-label {
+  font-family: "Inter", sans-serif;
+  font-size: 0.6875rem;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.text-label-md {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   8-COLUMN GRID SYSTEM
+   ============================================================ */
+
+.grid-8 {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: var(--grid-gap);
+}
+
+.col-span-1  { grid-column: span 1; }
+.col-span-2  { grid-column: span 2; }
+.col-span-3  { grid-column: span 3; }
+.col-span-4  { grid-column: span 4; }
+.col-span-5  { grid-column: span 5; }
+.col-span-6  { grid-column: span 6; }
+.col-span-7  { grid-column: span 7; }
+.col-span-8  { grid-column: span 8; }
+
+.col-start-1 { grid-column-start: 1; }
+.col-start-2 { grid-column-start: 2; }
+.col-start-3 { grid-column-start: 3; }
+.col-start-4 { grid-column-start: 4; }
+.col-start-5 { grid-column-start: 5; }
+
+/* Responsive collapse */
+@media (max-width: 1023px) {
+  .grid-8 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .grid-8 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+
+.container-grid {
+  width: 100%;
+  max-width: var(--grid-max);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+/* ============================================================
+   SECTION RHYTHM
+   ============================================================ */
+
+.section-pad {
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+/* ============================================================
+   PIXEL UTILITIES
+   ============================================================ */
+
+@utility pixelated {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Pixel-art corner bracket border */
+@utility pixel-border {
+  position: relative;
+}
+
+/* Scanline overlay */
+@utility scanlines {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.07) 3px,
+    rgba(0, 0, 0, 0.07) 4px
+  );
+}
+
+/* ============================================================
+   SURFACE UTILITIES
+   ============================================================ */
 
 @utility panel-arcane {
-  background-color: var(--card);
-  border: 1px solid var(--border);
+  background-color: rgba(26, 59, 82, 0.90);
+  border: 1px solid rgba(77, 217, 192, 0.25);
   box-shadow: var(--shadow-panel);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
+
+@utility panel-deep {
+  background-color: rgba(74, 38, 105, 0.35);
+  border: 1px solid rgba(224, 51, 158, 0.18);
+  box-shadow: var(--shadow-deep);
+}
+
+@utility surface-navy {
+  background-color: #161C30;
+}
+
+@utility surface-blue {
+  background-color: #1A3B52;
+}
+
+@utility surface-purple {
+  background-color: #4A2669;
+}
+
+/* ============================================================
+   GLOW UTILITIES
+   ============================================================ */
 
 @utility glow-text {
   text-shadow: var(--glow-primary);
 }
 
-@utility hotspot-ring {
-  box-shadow: var(--glow-primary), inset 0 0 18px oklch(0.68 0.26 305 / 0.35);
-  border: 1px solid oklch(0.8 0.2 305 / 0.8);
-  background-color: oklch(0.68 0.26 305 / 0.12);
+@utility glow-amber {
+  text-shadow: 0 0 32px rgba(245, 169, 78, 0.60);
 }
 
-@utility pixelated {
-  image-rendering: pixelated;
+@utility glow-turquoise {
+  text-shadow: 0 0 28px rgba(77, 217, 192, 0.55);
+}
+
+/* ============================================================
+   HOTSPOT (skills lab) — preserved + improved
+   ============================================================ */
+
+@utility hotspot-ring {
+  box-shadow:
+    0 0 0 1px rgba(77, 217, 192, 0.75),
+    0 0 18px rgba(77, 217, 192, 0.30),
+    inset 0 0 14px rgba(77, 217, 192, 0.12);
+  border: 1px solid rgba(77, 217, 192, 0.80);
+  background-color: rgba(77, 217, 192, 0.08);
+}
+
+/* ============================================================
+   INTERACTIVE ELEMENTS
+   ============================================================ */
+
+/* Primary action button — amber */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background-color: #F5A94E;
+  color: #161C30;
+  font-family: "Inter", sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid #F5A94E;
+  cursor: pointer;
+  transition: background-color var(--transition-base),
+              box-shadow var(--transition-base),
+              transform var(--transition-base);
+  outline: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: #ffc36e;
+  box-shadow: var(--glow-amber);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid #F5A94E;
+  outline-offset: 3px;
+}
+
+/* Ghost button — turquoise border */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6875rem 1.625rem;
+  background-color: transparent;
+  color: #4DD9C0;
+  font-family: "Inter", sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(77, 217, 192, 0.50);
+  cursor: pointer;
+  transition: color var(--transition-base),
+              border-color var(--transition-base),
+              box-shadow var(--transition-base);
+  outline: none;
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  color: #EDE8DC;
+  border-color: #4DD9C0;
+  box-shadow: var(--glow-turquoise);
+}
+
+.btn-ghost:focus-visible {
+  outline: 2px solid #4DD9C0;
+  outline-offset: 3px;
+}
+
+/* Text link — amber underline */
+.link-amber {
+  color: #F5A94E;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(245, 169, 78, 0.40);
+  padding-bottom: 1px;
+  transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+.link-amber:hover {
+  color: #ffc36e;
+  border-color: #ffc36e;
+}
+
+/* ============================================================
+   PIXEL CORNER BRACKETS
+   (used as decorative structural elements)
+   ============================================================ */
+
+.bracket-corner {
+  position: relative;
+}
+
+.bracket-corner::before,
+.bracket-corner::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+
+.bracket-corner::before {
+  top: 0;
+  left: 0;
+  border-top: 2px solid rgba(245, 169, 78, 0.55);
+  border-left: 2px solid rgba(245, 169, 78, 0.55);
+}
+
+.bracket-corner::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid rgba(245, 169, 78, 0.55);
+  border-right: 2px solid rgba(245, 169, 78, 0.55);
+}
+
+/* Turquoise variant */
+.bracket-corner-tech::before {
+  border-top-color: rgba(77, 217, 192, 0.55);
+  border-left-color: rgba(77, 217, 192, 0.55);
+}
+
+.bracket-corner-tech::after {
+  border-bottom-color: rgba(77, 217, 192, 0.55);
+  border-right-color: rgba(77, 217, 192, 0.55);
+}
+
+/* ============================================================
+   PIXEL DIVIDER
+   ============================================================ */
+
+.pixel-divider {
+  width: 100%;
+  height: 2px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(245, 169, 78, 0.45) 0px,
+    rgba(245, 169, 78, 0.45) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+.pixel-divider-tech {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(77, 217, 192, 0.35) 0px,
+    rgba(77, 217, 192, 0.35) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+/* ============================================================
+   SECTION NUMBER LABEL
+   ============================================================ */
+
+.section-eyebrow {
+  font-family: "Inter", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: #4DD9C0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-eyebrow::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  background-color: rgba(77, 217, 192, 0.45);
+}
+
+/* ============================================================
+   STATUS BADGE
+   ============================================================ */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.2rem 0.625rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+
+.status-badge--complete {
+  color: #4DD9C0;
+  border-color: rgba(77, 217, 192, 0.35);
+  background-color: rgba(77, 217, 192, 0.07);
+}
+
+.status-badge--progress {
+  color: #F5A94E;
+  border-color: rgba(245, 169, 78, 0.35);
+  background-color: rgba(245, 169, 78, 0.07);
+}
+
+.status-badge--concept {
+  color: #E0339E;
+  border-color: rgba(224, 51, 158, 0.35);
+  background-color: rgba(224, 51, 158, 0.07);
+}
+
+/* ============================================================
+   TAG / CHIP (metadata)
+   ============================================================ */
+
+.meta-tag {
+  display: inline-block;
+  padding: 0.1875rem 0.5rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #8A96A8;
+  border: 1px solid rgba(138, 150, 168, 0.22);
+  background-color: rgba(22, 28, 48, 0.50);
+  white-space: nowrap;
+}
+
+.meta-tag--tech {
+  color: #4DD9C0;
+  border-color: rgba(77, 217, 192, 0.22);
+  background-color: rgba(77, 217, 192, 0.06);
+}
+
+.meta-tag--amber {
+  color: #F5A94E;
+  border-color: rgba(245, 169, 78, 0.25);
+  background-color: rgba(245, 169, 78, 0.06);
+}
+
+/* ============================================================
+   FORM ELEMENTS
+   ============================================================ */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-label {
+  font-family: "Inter", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4DD9C0;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  background-color: rgba(22, 28, 48, 0.70);
+  border: 1px solid rgba(77, 217, 192, 0.20);
+  color: #EDE8DC;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: rgba(77, 217, 192, 0.60);
+  box-shadow: 0 0 0 1px rgba(77, 217, 192, 0.25);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: rgba(138, 150, 168, 0.55);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+/* ============================================================
+   SCROLL ANIMATIONS (GSAP targets)
+   ============================================================ */
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-28px);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(28px);
+}
+
+/* ============================================================
+   NAV ACTIVE STATE
+   ============================================================ */
+
+.nav-link {
+  position: relative;
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(237, 232, 220, 0.65);
+  text-decoration: none;
+  transition: color var(--transition-base);
+  padding-bottom: 2px;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #F5A94E;
+  transition: width var(--transition-slow);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #F5A94E;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid #F5A94E;
+  outline-offset: 4px;
+}
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(22, 28, 48, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  transform: translateX(100%);
+  transition: transform 380ms cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+.mobile-menu .nav-link {
+  font-size: 1.125rem;
+  letter-spacing: 0.22em;
+}
+
+/* ============================================================
+   TIMELINE (About section)
+   ============================================================ */
+
+.timeline-track {
+  position: relative;
+}
+
+.timeline-track::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(245, 169, 78, 0.35) 8%,
+    rgba(245, 169, 78, 0.35) 92%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+}
+
+@media (max-width: 767px) {
+  .timeline-track::before {
+    left: 1.25rem;
+  }
+}
+
+.timeline-node {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: #F5A94E;
+  border: 2px solid #161C30;
+  outline: 1px solid #F5A94E;
+  z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .timeline-node {
+    left: 1.25rem;
+  }
+}
+
+/* ============================================================
+   PROJECT EXPAND ANIMATION
+   ============================================================ */
+
+.project-details {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 500ms cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 350ms ease;
+  opacity: 0;
+}
+
+.project-details.open {
+  max-height: 800px;
+  opacity: 1;
+}
+
+/* ============================================================
+   PIXEL PARTICLE CANVAS
+   ============================================================ */
+
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============================================================
+   KNOWLEDGE ARCHIVE GRID
+   ============================================================ */
+
+.knowledge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1px;
+  background-color: rgba(77, 217, 192, 0.08);
+}
+
+.knowledge-item {
+  background-color: #161C30;
+  padding: 1.125rem 1.25rem;
+  transition: background-color var(--transition-base);
+}
+
+.knowledge-item:hover {
+  background-color: rgba(26, 59, 82, 0.60);
+}
+
+/* ============================================================
+   LOVE SECTION
+   ============================================================ */
+
+.love-bg {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+  .love-bg {
+    background-attachment: scroll;
+  }
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+
+.text-amber    { color: #F5A94E; }
+.text-turquoise{ color: #4DD9C0; }
+.text-magenta  { color: #E0339E; }
+.text-muted    { color: #8A96A8; }
+.text-fore     { color: #EDE8DC; }
+
+.border-amber-subtle  { border-color: rgba(245, 169, 78, 0.25); }
+.border-tech-subtle   { border-color: rgba(77, 217, 192, 0.20); }
+
+/* ============================================================
+   FOCUS VISIBLE GLOBAL RESET
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid #4DD9C0;
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   SELECTION
+   ============================================================ */
+
+::selection {
+  background-color: rgba(245, 169, 78, 0.28);
+  color: #EDE8DC;
 }

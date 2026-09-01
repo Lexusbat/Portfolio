@@ -22,84 +22,93 @@ export type LabObject = {
 };
 
 export const labObjects: LabObject[] = [
+
   {
     id: "distillation-flask",
-    name: "Condenser Flask",
-    kind: "Round-bottom flask on ring stand",
-    contents: "Distilled nightshade essence",
+    name: "Languages",
+    kind: "Programming & web languages",
+    contents: "HTML • CSS • JavaScript • TypeScript • Python • Delphi",
     detail:
-      "The workhorse of the bench. Its curved condenser neck returns vapour to the bulb, concentrating the essence over long, patient hours.",
+      "The foundational languages of the workshop. HTML and CSS form the structure and visual layer, JavaScript and TypeScript drive modern web applications, while Python and Delphi represent earlier programming experience and experimentation beyond the browser.",
     image: distillationFlask,
     area: { left: 2.5, top: 27, width: 12, height: 45 },
   },
+
   {
     id: "test-tube-rack",
-    name: "Fermenting Trio",
-    kind: "Test tubes in a wooden rack",
-    contents: "Crimson bloodroot tincture",
+    name: "Frameworks",
+    kind: "Frontend application development",
+    contents: "React • React TS • Flask • Django",
     detail:
-      "Three tubes of tincture left to settle in their timber cradle. A stray bead of sediment still drifts through each one.",
+      "A collection of frameworks used to turn code into functioning applications. React and TypeScript form the primary frontend stack, while Flask and Django have been explored through backend and application experiments.",
     image: testTubeRack,
     area: { left: 16, top: 22, width: 14, height: 40 },
   },
+
   {
     id: "round-potion-flask",
-    name: "Voidglass Bulb",
-    kind: "Round flask, corked",
-    contents: "Concentrated shadow draught",
+    name: "Styling",
+    kind: "Interface design & responsive systems",
+    contents: "Tailwind CSS • CSS • Responsive Design",
     detail:
-      "A dense, swirling brew that seems to fold light in on itself. Handle by the neck only — the glass runs cold to the touch.",
+      "The visual chemistry of the workshop. Used to construct responsive layouts, establish design systems, control typography and spacing, and translate visual concepts into polished interfaces across different screen sizes.",
     image: roundPotionFlask,
     area: { left: 30, top: 20, width: 13, height: 42 },
   },
+
   {
     id: "small-vial",
-    name: "Traveler's Vial",
-    kind: "Small corked bottle",
-    contents: "Single-dose restorative",
+    name: "Animation",
+    kind: "Motion & interaction",
+    contents: "GSAP • Lenis • Scroll-based interaction",
     detail:
-      "Compact enough for a coat pocket. A quick pull of the cork and a single measure is all it holds — no more, no less.",
+      "The movement layer of the interface. GSAP and Lenis are used to create controlled motion, smooth scrolling, transitions, scroll-driven effects, and interactive experiences that make a website feel less like a document and more like an environment.",
     image: smallVial,
     area: { left: 43, top: 30, width: 9, height: 34 },
   },
+
   {
     id: "erlenmeyer",
-    name: "Frostlight Flask",
-    kind: "Erlenmeyer conical flask",
-    contents: "Chilled luminous solution",
+    name: "Backend",
+    kind: "Application infrastructure",
+    contents: "Supabase • PostgreSQL • REST APIs",
     detail:
-      "Cyan light pools at the base and climbs in slow bubbles. Kept near the window ledge, where it seems to glow brightest at dusk.",
+      "The machinery beneath the interface. Used to connect frontend applications to persistent data, authentication, APIs, and database functionality without losing sight of the user experience happening above it.",
     image: erlenmeyer,
     area: { left: 52, top: 24, width: 13, height: 40 },
   },
+
   {
     id: "apothecary-bottles",
-    name: "Apothecary Row",
-    kind: "Three matching corked bottles",
-    contents: "Labeled violet remedies",
+    name: "Development",
+    kind: "Frontend development environment",
+    contents: "Vite • Node.js • npm • React TypeScript",
     detail:
-      "A trio of stock bottles, labels worn soft from handling. One cork lies loose in front — the middle bottle's contents are still in use.",
+      "The working environment where ideas become applications. Used to scaffold projects, manage dependencies, run development servers, build production applications, and maintain a fast iteration cycle while developing.",
     image: apothecaryBottles,
     area: { left: 65, top: 26, width: 16, height: 40 },
   },
+
   {
     id: "tall-tube-rack",
-    name: "Reagent Line",
-    kind: "Five tall tubes in a steel rack",
-    contents: "Indigo base reagent",
+    name: "Deployment",
+    kind: "Web application delivery",
+    contents: "Vercel • Cloudflare • GitHub",
     detail:
-      "Five identical measures, kept uniform for consistency's sake. Used whenever a recipe calls for precise, repeated dosing.",
+      "The final stage of the process, moving projects from a local development environment onto the public web. Used for hosting, deployment, version control, and maintaining projects throughout their development lifecycle.",
     image: tallTubeRack,
     area: { left: 80, top: 20, width: 15, height: 38 },
   },
+
   {
     id: "specimen-jar",
-    name: "Preserving Jar",
-    kind: "Lidded specimen jar",
-    contents: "Suspended magenta culture",
+    name: "Tools",
+    kind: "Development & creative workflow",
+    contents: "Git • GitHub • VS Code • APIs • Web Scraping",
     detail:
-      "Sealed tight against the air. Faint motes drift and catch the light inside — best not to open this one indoors.",
+      "The everyday instruments scattered across the workshop. Used for version control, code editing, experimentation, integrating external services, working with APIs, and extracting information from the web when a project calls for it.",
     image: specimenJar,
     area: { left: 88, top: 15, width: 11, height: 46 },
   },
+
 ];
