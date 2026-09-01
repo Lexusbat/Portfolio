@@ -129,7 +129,7 @@ const Hero = () => {
       aria-label="Introduction"
       className="
         relative min-h-screen flex flex-col
-        items-start justify-end
+        items-start justify-center
         overflow-hidden
         pb-20 pt-[60px]
       "
@@ -182,46 +182,23 @@ const Hero = () => {
       {/* ── Content ── */}
       <div className="container-grid relative z-10 w-full">
         <div className="grid-8">
-          <div className="col-span-8 lg:col-span-6 flex flex-col gap-7">
+          <div className="col-span-8 lg:col-span-6 flex flex-col gap-7 items-center">
 
-            {/* Eyebrow */}
-            <p className="section-eyebrow reveal-up">
-              <span
-                aria-hidden="true"
-                className="block w-[6px] h-[6px] rotate-45 bg-[#F5A94E] mr-1"
-              />
-              Archive Entry 001
-            </p>
+           
 
             {/* Main heading */}
             <h1
-              className="text-display-hero text-[#EDE8DC] reveal-up"
-              style={{ fontFamily: 'Namesake, serif' }}
+              className="text-[#EDE8DC] reveal-up text-center w-[80%]"
+              style={{ fontFamily: 'Namesake, serif', opacity: 1, transform: 'translateY(0)', fontSize: 'clamp(4.5rem, 12vw, 10rem)', lineHeight: '0.92', letterSpacing: '-0.01em' }}
             >
-              Full Stack
-              <br />
-              <span
-                className="text-[#F5A94E]"
-                style={{ textShadow: '0 0 48px rgba(245,169,78,0.35)' }}
-              >
-                Developer
-              </span>
-              <br />
-              &amp; Designer
+              Full Stack Developer
+              & Designer
             </h1>
 
-            {/* Supporting statement */}
-            <p
-              className="text-gulzar-lg text-[#8A96A8] max-w-[42ch] reveal-up"
-              style={{ fontFamily: 'Gulzar, serif' }}
-            >
-              I build web experiences at the intersection of design,
-              code and imagination — from the first wireframe to the
-              final deployed artefact.
-            </p>
+            
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4 reveal-up">
+            <div className=" flex flex-wrap items-center gap-4 reveal-up" style={{ opacity: 1, transform: 'translateY(0)' }}>
               <a href="#projects" className="btn-primary">
                 Explore the Archive
               </a>
@@ -234,19 +211,6 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* ── Pixel corner marks on the section ── */}
-      <span
-        aria-hidden="true"
-        className="absolute top-[72px] left-4 md:left-8 text-[#F5A94E]/30 font-mono text-[10px] tracking-widest"
-      >
-        [ 001 ]
-      </span>
-      <span
-        aria-hidden="true"
-        className="absolute top-[72px] right-4 md:right-8 text-[#4DD9C0]/25 font-mono text-[10px] tracking-widest"
-      >
-        HOME
-      </span>
 
       {/* ── Scroll indicator ── */}
       <a

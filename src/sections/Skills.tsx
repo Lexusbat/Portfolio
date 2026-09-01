@@ -294,7 +294,7 @@ export function Skills() {
         <div className="mb-10">
           <div className="flex flex-col gap-5">
 
-            <p className="section-eyebrow">03 · Skills</p>
+            
 
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
               <h2
@@ -302,8 +302,10 @@ export function Skills() {
                 className="text-display-xl text-[#EDE8DC]"
                 style={{ fontFamily: 'Namesake, serif' }}
               >
-                The<br />Workshop
+                The<br />Laboratory
               </h2>
+              <h3 className="text-gulzar-md text-[#F5A94E] max-w-[42ch] sm:text-right pb-1"
+                style={{ fontFamily: 'Gulzar, serif' }}>My Tech Stack</h3>
 
               <p
                 className="text-gulzar-md text-[#8A96A8] max-w-[42ch] sm:text-right pb-1"
