@@ -105,8 +105,6 @@ const Contact = () => {
           <div className="col-span-8 lg:col-span-3 flex flex-col gap-8">
 
             <div className="flex flex-col gap-5">
-              <p className="section-eyebrow">06 · Contact</p>
-
               <h2
                 id="contact-heading"
                 className="text-display-xl text-[#EDE8DC]"

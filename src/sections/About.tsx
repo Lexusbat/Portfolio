@@ -249,8 +249,6 @@ const About = () => (
       <div className="grid-8 mb-16">
         <div className="col-span-8 flex flex-col gap-5">
 
-          <p className="section-eyebrow">04 · About</p>
-
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <h2
               id="about-heading"

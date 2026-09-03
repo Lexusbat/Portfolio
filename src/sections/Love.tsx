@@ -65,11 +65,6 @@ const Love = () => (
         {/* Heading block — centered, spanning full width */}
         <div className="col-span-8 flex flex-col items-center text-center gap-8">
 
-          {/* Eyebrow */}
-          <p className="section-eyebrow justify-center">
-            05 · Love
-          </p>
-
           {/* Main heading */}
           <h2
             id="love-heading"

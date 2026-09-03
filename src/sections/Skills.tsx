@@ -84,7 +84,6 @@ function KnowledgeArchive() {
 
       {/* Sub-heading */}
       <div className="flex flex-col gap-3 mb-8">
-        <p className="section-eyebrow">Knowledge Archive</p>
         <p
           className="text-gulzar-md text-[#8A96A8] max-w-[52ch]"
           style={{ fontFamily: 'Gulzar, serif' }}
