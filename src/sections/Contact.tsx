@@ -98,8 +98,6 @@ const Contact = () => {
       aria-labelledby="contact-heading"
       className="relative section-pad bg-[#161C30]"
     >
-      <div className="pixel-divider opacity-20 mb-0" aria-hidden="true" />
-
       <div className="container-grid">
         <div className="grid-8 gap-y-12">
 
@@ -125,9 +123,6 @@ const Contact = () => {
                 software problem? Open a transmission.
               </p>
             </div>
-
-            {/* Pixel divider */}
-            <div className="pixel-divider w-20 opacity-40" aria-hidden="true" />
 
             {/* Direct pathways */}
             <div className="flex flex-col gap-5">
@@ -215,25 +210,6 @@ const Contact = () => {
               </div>
             </div>
 
-          </div>
-
-          {/* ── Vertical pixel divider — desktop only ── */}
-          <div
-            aria-hidden="true"
-            className="hidden lg:flex col-span-1 justify-center"
-          >
-            <div
-              className="w-px h-full"
-              style={{
-                backgroundImage: `repeating-linear-gradient(
-                  to bottom,
-                  rgba(77,217,192,0.25) 0px,
-                  rgba(77,217,192,0.25) 4px,
-                  transparent 4px,
-                  transparent 8px
-                )`,
-              }}
-            />
           </div>
 
           {/* ── Right column: form ── col 5–8 */}
@@ -414,7 +390,6 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="pixel-divider opacity-20 mt-16" aria-hidden="true" />
     </section>
   )
 }

@@ -320,16 +320,6 @@ export function Skills() {
           </div>
         </div>
 
-        {/* ── Pixel divider above lab ── */}
-        <div
-          aria-hidden="true"
-          className="mb-4"
-          style={{
-            height: '2px',
-            backgroundImage: `repeating-linear-gradient(90deg, rgba(77,217,192,0.30) 0px, rgba(77,217,192,0.30) 4px, transparent 4px, transparent 8px)`,
-          }}
-        />
-
         {/* ── Lab scene ── */}
         <div className="bracket-corner bracket-corner-tech">
           <LabScene />
@@ -340,15 +330,6 @@ export function Skills() {
 
       </div>
 
-      {/* Bottom pixel divider */}
-      <div
-        aria-hidden="true"
-        className="mt-16"
-        style={{
-          height: '2px',
-          backgroundImage: `repeating-linear-gradient(90deg, rgba(77,217,192,0.20) 0px, rgba(77,217,192,0.20) 4px, transparent 4px, transparent 8px)`,
-        }}
-      />
     </section>
   )
 }

@@ -508,32 +508,6 @@ body {
 }
 
 /* ============================================================
-   PIXEL DIVIDER
-   ============================================================ */
-
-.pixel-divider {
-  width: 100%;
-  height: 2px;
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(245, 169, 78, 0.45) 0px,
-    rgba(245, 169, 78, 0.45) 4px,
-    transparent 4px,
-    transparent 8px
-  );
-}
-
-.pixel-divider-tech {
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(77, 217, 192, 0.35) 0px,
-    rgba(77, 217, 192, 0.35) 4px,
-    transparent 4px,
-    transparent 8px
-  );
-}
-
-/* ============================================================
    SECTION NUMBER LABEL
    ============================================================ */
 

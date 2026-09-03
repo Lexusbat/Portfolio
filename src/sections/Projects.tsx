@@ -50,33 +50,27 @@ function MetaRow({
    Individual project record
 ───────────────────────────────────────────── */
 
-function ProjectRecord({ project, index }: { project: Project; index: number }) {
+function ProjectRecord({ project}: { project: Project; index: number }) {
   const [open, setOpen] = useState(false)
   const detailsId = useId()
 
-  /* Archive index — zero-padded */
-  const archiveNum = String(index + 1).padStart(2, '0')
+
 
   return (
     <article
       className="
-        group relative
+        group p-6! relative
         border-b border-[rgba(77,217,192,0.12)]
         transition-colors duration-300
         hover:border-[rgba(77,217,192,0.22)]
       "
     >
       {/* ── Collapsed row ── */}
-      <div className="grid-8 items-start py-7 gap-y-5">
+      <div className="grid-8 items-start gap-y-5">
 
         {/* Index + status — col 1 */}
         <div className="col-span-1 flex flex-col gap-2 pt-1">
-          <span
-            className="text-label text-[#4DD9C0]/40 tabular-nums"
-            aria-hidden="true"
-          >
-            {archiveNum}
-          </span>
+          
           <span className={`status-badge ${STATUS_CLASS[project.status]} text-[0.6rem]`}>
             {project.status}
           </span>
@@ -142,10 +136,7 @@ function ProjectRecord({ project, index }: { project: Project; index: number }) 
               flex items-center gap-2
               text-label text-[#4DD9C0]/60
               hover:text-[#4DD9C0]
-              transition-colors duration-200
-              outline-none focus-visible:outline-2
-              focus-visible:outline-[#4DD9C0]
-              focus-visible:outline-offset-3
+            
               cursor-pointer
             "
           >
@@ -174,18 +165,14 @@ function ProjectRecord({ project, index }: { project: Project; index: number }) 
         <div
           className="
             mx-0 mb-7
-            border-t border-[rgba(77,217,192,0.10)]
+            
             pt-6 pb-2
           "
         >
           {/* Archive file header */}
-          <div className="flex items-center gap-3 mb-6">
-            <div className="pixel-divider-tech flex-1 h-px" aria-hidden="true" />
-            <span className="text-label text-[#4DD9C0]/40 whitespace-nowrap">
-              Archive Record · {archiveNum}
-            </span>
-            <div className="pixel-divider-tech flex-1 h-px" aria-hidden="true" />
-          </div>
+          <div className="flex items-center gap-3 mb-6 mt-6">
+            
+         
 
           <div className="grid-8 gap-y-8">
 
@@ -233,6 +220,7 @@ function ProjectRecord({ project, index }: { project: Project; index: number }) 
                   {project.collaboration}
                 </span>
               </div>
+               </div>
 
             </div>
           </div>
@@ -252,9 +240,6 @@ const Projects = () => (
     aria-labelledby="projects-heading"
     className="relative section-pad bg-[#161C30]"
   >
-    {/* Top pixel divider */}
-    <div className="pixel-divider opacity-20 mb-0" aria-hidden="true" />
-
     <div className="container-grid">
 
       {/* ── Section header — asymmetric ── */}
@@ -262,9 +247,7 @@ const Projects = () => (
 
         {/* Eyebrow left-aligned col 1–2 */}
         <div className="col-span-8 flex flex-col gap-5">
-          <p className="section-eyebrow">
-            02 · Projects
-          </p>
+         
 
           {/* Heading spans left, metadata floats right */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -291,7 +274,7 @@ const Projects = () => (
 
       {/* ── Project list ── */}
       <div
-        className="border-t border-[rgba(77,217,192,0.12)]"
+        className="border-t border-[rgba(77,217,192,0.12)] pt-6"
         role="list"
         aria-label="Project records"
       >
@@ -304,8 +287,6 @@ const Projects = () => (
 
     </div>
 
-    {/* Bottom pixel divider */}
-    <div className="pixel-divider opacity-20 mt-0" aria-hidden="true" />
   </section>
 )
 

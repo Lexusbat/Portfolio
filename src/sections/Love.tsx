@@ -97,9 +97,6 @@ const Love = () => (
             The things that pull me forward — in work, in craft, and everywhere in between.
           </p>
 
-          {/* Pixel divider */}
-          <div className="pixel-divider w-24 opacity-40" aria-hidden="true" />
-
           {/* Loved things — horizontal flowing list */}
           <ul
             className="
@@ -160,21 +157,6 @@ const Love = () => (
       }}
     />
 
-    {/* ── Pixel divider at base ── */}
-    <div
-      aria-hidden="true"
-      className="absolute bottom-0 left-0 right-0"
-      style={{
-        backgroundImage: `repeating-linear-gradient(
-          90deg,
-          rgba(224,51,158,0.25) 0px,
-          rgba(224,51,158,0.25) 4px,
-          transparent 4px,
-          transparent 8px
-        )`,
-        height: '2px',
-      }}
-    />
   </section>
 )
 

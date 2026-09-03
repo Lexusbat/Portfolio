@@ -238,11 +238,7 @@ const Hero = () => {
         </span>
       </a>
 
-      {/* ── Bottom pixel divider ── */}
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 left-0 right-0 pixel-divider opacity-30"
-      />
+    
     </section>
   )
 }

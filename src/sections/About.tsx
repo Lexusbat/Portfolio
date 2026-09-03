@@ -273,8 +273,6 @@ const About = () => (
       background: 'linear-gradient(to bottom, #161C30 0%, #1a1f38 50%, #161C30 100%)',
     }}
   >
-    <div className="pixel-divider opacity-20 mb-0" aria-hidden="true" />
-
     <div className="container-grid">
 
       {/* ── Section header ── */}
@@ -361,7 +359,6 @@ const About = () => (
 
     </div>
 
-    <div className="pixel-divider opacity-20 mt-16" aria-hidden="true" />
   </section>
 )
 

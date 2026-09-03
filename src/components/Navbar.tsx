@@ -161,9 +161,6 @@ const Navbar = () => {
           className="relative z-10 flex flex-col items-center gap-8"
           aria-label="Mobile navigation links"
         >
-          {/* Pixel divider top */}
-          <div className="pixel-divider w-24 mb-2" aria-hidden="true" />
-
           {NAV_ITEMS.map(({ id, label }) => (
             <a
               key={id}
@@ -187,8 +184,6 @@ const Navbar = () => {
             Start a Project
           </a>
 
-          {/* Pixel divider bottom */}
-          <div className="pixel-divider w-24 mt-2" aria-hidden="true" />
         </nav>
       </div>
     </>
