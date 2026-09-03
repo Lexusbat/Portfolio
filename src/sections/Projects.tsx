@@ -245,7 +245,6 @@ const Projects = () => (
       {/* ── Section header — asymmetric ── */}
       <div className="grid-8 mb-14">
 
-        {/* Eyebrow left-aligned col 1–2 */}
         <div className="col-span-8 flex flex-col gap-5">
          
 

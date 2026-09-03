@@ -8,7 +8,6 @@
 interface Checkpoint {
   id: string
   index: number           // display number
-  label: string           // eyebrow / location marker
   heading: string
   body: string
   year?: string
@@ -23,7 +22,6 @@ const checkpoints: Checkpoint[] = [
   {
     id: 'origin',
     index: 1,
-    label: 'Origin',
     heading: 'Where It Started',
     body: 'Replace this with your background — where you grew up, what first drew you to technology, or how you came to be interested in development and design. Keep it brief and personal.',
     year: '——',
@@ -34,7 +32,6 @@ const checkpoints: Checkpoint[] = [
   {
     id: 'education',
     index: 2,
-    label: 'Education',
     heading: 'The Study Hall',
     body: 'Replace with your educational background — qualifications, institutions, or relevant coursework. If self-taught, describe how you built your knowledge base independently.',
     year: '——',
@@ -45,7 +42,6 @@ const checkpoints: Checkpoint[] = [
   {
     id: 'interests',
     index: 3,
-    label: 'Interests',
     heading: 'What Pulls Me In',
     body: 'Replace with the things that genuinely interest you — not just professionally, but personally. The intersection between your interests and your work often says more than a skills list.',
     year: '——',
@@ -56,7 +52,6 @@ const checkpoints: Checkpoint[] = [
   {
     id: 'craft',
     index: 4,
-    label: 'Craft',
     heading: 'How I Build',
     body: 'Replace with your approach to development and design. Do you start with design or code? What does your process look like? What do you care about when building something?',
     year: '——',
@@ -67,7 +62,6 @@ const checkpoints: Checkpoint[] = [
   {
     id: 'now',
     index: 5,
-    label: 'Current Quest',
     heading: 'Right Now',
     body: 'Replace with what you are working on, learning, or exploring at the moment. This is the most immediate and human thing on the page — be specific and honest.',
     year: '2025',
@@ -78,7 +72,6 @@ const checkpoints: Checkpoint[] = [
   {
     id: 'next',
     index: 6,
-    label: 'Next Destination',
     heading: 'Where I\'m Headed',
     body: 'Replace with where you want to go — the kind of work you want to do, the kind of problems you want to solve, or the kind of collaborations you are looking for.',
     year: '→',
