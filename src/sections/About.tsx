@@ -123,7 +123,7 @@ function CheckpointCard({ cp }: { cp: Checkpoint }) {
       {/* ── Content block — left side ── */}
       {isLeft && (
         <div className="col-span-8 md:col-span-3 md:col-start-1 flex flex-col items-start md:items-end">
-          <CardContent cp={cp} color={color} border={border} bg={bg} align="right" />
+          <CardContent cp={cp} border={border} bg={bg} align="right" />
         </div>
       )}
 
@@ -168,14 +168,14 @@ function CheckpointCard({ cp }: { cp: Checkpoint }) {
       {/* ── Content block — right side ── */}
       {!isLeft && (
         <div className="col-span-8 md:col-span-3 md:col-start-6 flex flex-col items-start">
-          <CardContent cp={cp} color={color} border={border} bg={bg} align="left" />
+          <CardContent cp={cp} border={border} bg={bg} align="left" />
         </div>
       )}
 
       {/* Mobile: always full width below the marker */}
       {isLeft && (
         <div className="col-span-8 md:hidden">
-          <CardContent cp={cp} color={color} border={border} bg={bg} align="left" />
+          <CardContent cp={cp} border={border} bg={bg} align="left" />
         </div>
       )}
 
@@ -188,13 +188,11 @@ function CheckpointCard({ cp }: { cp: Checkpoint }) {
 ───────────────────────────────────────────── */
 function CardContent({
   cp,
-  color,
   border,
   bg,
   align,
 }: {
   cp: Checkpoint
-  color: string
   border: string
   bg: string
   align: 'left' | 'right'
@@ -203,7 +201,8 @@ function CardContent({
     <div
       className="
         w-full max-w-[340px]
-        p-5 mb-8
+        p-6
+        mb-8
         border
         transition-colors duration-300
         hover:brightness-110
@@ -214,40 +213,11 @@ function CardContent({
         textAlign: align === 'right' ? 'right' : 'left',
       }}
     >
-      {/* Eyebrow row */}
-      <div
-        className={`
-          flex items-center gap-2 mb-3
-          ${align === 'right' ? 'justify-end' : 'justify-start'}
-        `}
-      >
-        {align === 'left' && (
-          <span
-            className="w-[5px] h-[5px] rotate-45 shrink-0"
-            style={{ backgroundColor: color }}
-            aria-hidden="true"
-          />
-        )}
-        <span className="text-label" style={{ color }}>
-          {String(cp.index).padStart(2, '0')} · {cp.label}
-        </span>
-        {align === 'right' && (
-          <span
-            className="w-[5px] h-[5px] rotate-45 shrink-0"
-            style={{ backgroundColor: color }}
-            aria-hidden="true"
-          />
-        )}
-        {cp.year && (
-          <span className="text-label text-[#8A96A8] ml-auto pl-3">
-            {cp.year}
-          </span>
-        )}
-      </div>
+     
 
       {/* Heading */}
       <h3
-        className="text-display-md text-[#EDE8DC] mb-2"
+        className="text-display-md text-[#EDE8DC] mb-2 "
         style={{ fontFamily: 'Namesake, serif' }}
       >
         {cp.heading}

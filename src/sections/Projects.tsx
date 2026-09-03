@@ -59,7 +59,7 @@ function ProjectRecord({ project}: { project: Project; index: number }) {
   return (
     <article
       className="
-        group p-6! relative
+        group p-6 relative
         border-b border-[rgba(77,217,192,0.12)]
         transition-colors duration-300
         hover:border-[rgba(77,217,192,0.22)]
