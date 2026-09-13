@@ -127,15 +127,7 @@ function KnowledgeArchive() {
                     border-l-[2px]
                     transition-all duration-200
                   "
-                  style={{ borderLeftColor: TIER_COLOR[item.tier] + '40' }}
-                  onMouseEnter={(e) => {
-                    ;(e.currentTarget as HTMLElement).style.borderLeftColor =
-                      TIER_COLOR[item.tier]
-                  }}
-                  onMouseLeave={(e) => {
-                    ;(e.currentTarget as HTMLElement).style.borderLeftColor =
-                      TIER_COLOR[item.tier] + '40'
-                  }}
+                  
                 >
                   <div className="flex flex-col gap-0.5 min-w-0">
                     <span className="text-body-sm text-[#EDE8DC] font-medium">
@@ -147,14 +139,7 @@ function KnowledgeArchive() {
                       </span>
                     )}
                   </div>
-                  <span
-                    className="text-[0.65rem] mt-0.5 shrink-0"
-                    style={{ color: TIER_COLOR[item.tier] }}
-                    aria-label={item.tier}
-                    title={item.tier}
-                  >
-                    {TIER_DOT[item.tier]}
-                  </span>
+                  
                 </li>
               ))}
             </ul>
