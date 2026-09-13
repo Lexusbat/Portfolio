@@ -122,7 +122,7 @@ export const projects: Project[] = [
 
   {
     id: 'project-four',
-    title: 'Project Title',
+    title: 'Nexus',
     shortDescription:
       `Replace this with a short description of your fourth project — one or two sentences.`,
     longDescription:

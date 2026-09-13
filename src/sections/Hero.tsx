@@ -191,7 +191,7 @@ const Hero = () => {
               className="text-[#EDE8DC] reveal-up text-center w-[80%]"
               style={{ fontFamily: 'Namesake, serif', opacity: 1, transform: 'translateY(0)', fontSize: 'clamp(4.5rem, 12vw, 10rem)', lineHeight: '0.92', letterSpacing: '-0.01em' }}
             >
-              Full Stack Developer
+              Front-End Developer
               & Designer
             </h1>
 
