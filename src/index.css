@@ -296,6 +296,32 @@ body {
   padding-block: clamp(4rem, 8vw, 7rem);
 }
 
+/* The map remains the interactive canvas while the artwork covers the full section. */
+.about-section {
+  isolation: isolate;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.about-section__wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgba(22, 28, 48, 0.28) 0%,
+    rgba(22, 28, 48, 0.08) 42%,
+    rgba(22, 28, 48, 0.42) 100%
+  );
+  pointer-events: none;
+}
+
+.about-map {
+  aspect-ratio: 3 / 4;
+  background: rgba(22, 28, 48, 0.12);
+}
+
 /* ============================================================
    PIXEL UTILITIES
    ============================================================ */

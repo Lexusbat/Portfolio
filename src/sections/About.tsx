@@ -1,326 +1,410 @@
+// sections/About.tsx
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import aboutMap from "../assets/images/About.webp";
+
 /* ============================================================
-   About — RPG Progression Map
-   A zigzagging journey through checkpoints.
-   Content text is clearly marked for replacement.
+   About — Pixelated Map Journey
+   A character walks a path across a gothic pixel-art map,
+   revealing checkpoints as popups. Content clearly marked
+   for replacement.
    ============================================================ */
 
 /* ─── Types ─────────────────────────────────────────────── */
 interface Checkpoint {
-  id: string
-  index: number           // display number
-  heading: string
-  body: string
-  year?: string
-  marker: string          // pixel symbol
-  side: 'left' | 'right' // which side of the track
-  accent: 'amber' | 'turquoise' | 'magenta'
+  id: string;
+  index: number; // display number
+  heading: string;
+  body: string;
+  year?: string;
+  marker: string; // pixel symbol
+  accent: "amber" | "turquoise" | "magenta";
+  x: number; // % position on map, left→right
+  y: number; // % position on map, top→bottom
 }
 
 /* ─── Data ───────────────────────────────────────────────── */
 /*  ← REPLACE ALL TEXT/YEAR VALUES WITH YOUR OWN CONTENT →  */
 const checkpoints: Checkpoint[] = [
   {
-    id: 'origin',
+    id: "origin",
     index: 1,
-    heading: 'Where It Started',
-    body: 'Replace this with your background — where you grew up, what first drew you to technology, or how you came to be interested in development and design. Keep it brief and personal.',
-    year: '——',
-    marker: '◆',
-    side: 'left',
-    accent: 'amber',
+    heading: "Where It Started",
+    body: "Replace this with your background — where you grew up, what first drew you to technology, or how you came to be interested in development and design. Keep it brief and personal.",
+    year: "——",
+    marker: "◆",
+    accent: "amber",
+    x: 18,
+    y: 13,
   },
   {
-    id: 'education',
+    id: "education",
     index: 2,
-    heading: 'The Study Hall',
-    body: 'Replace with your educational background — qualifications, institutions, or relevant coursework. If self-taught, describe how you built your knowledge base independently.',
-    year: '——',
-    marker: '△',
-    side: 'right',
-    accent: 'turquoise',
+    heading: "The Study Hall",
+    body: "Replace with your educational background — qualifications, institutions, or relevant coursework. If self-taught, describe how you built your knowledge base independently.",
+    year: "——",
+    marker: "△",
+    accent: "turquoise",
+    x: 76,
+    y: 18,
   },
   {
-    id: 'interests',
+    id: "interests",
     index: 3,
-    heading: 'What Pulls Me In',
-    body: 'Replace with the things that genuinely interest you — not just professionally, but personally. The intersection between your interests and your work often says more than a skills list.',
-    year: '——',
-    marker: '◇',
-    side: 'left',
-    accent: 'amber',
+    heading: "What Pulls Me In",
+    body: "Replace with the things that genuinely interest you — not just professionally, but personally. The intersection between your interests and your work often says more than a skills list.",
+    year: "——",
+    marker: "◇",
+    accent: "amber",
+    x: 30,
+    y: 45,
   },
   {
-    id: 'craft',
+    id: "craft",
     index: 4,
-    heading: 'How I Build',
-    body: 'Replace with your approach to development and design. Do you start with design or code? What does your process look like? What do you care about when building something?',
-    year: '——',
-    marker: '◈',
-    side: 'right',
-    accent: 'turquoise',
+    heading: "How I Build",
+    body: "Replace with your approach to development and design. Do you start with design or code? What does your process look like? What do you care about when building something?",
+    year: "——",
+    marker: "◈",
+    accent: "turquoise",
+    x: 70,
+    y: 63,
   },
   {
-    id: 'now',
+    id: "now",
     index: 5,
-    heading: 'Right Now',
-    body: 'Replace with what you are working on, learning, or exploring at the moment. This is the most immediate and human thing on the page — be specific and honest.',
-    year: '2025',
-    marker: '★',
-    side: 'left',
-    accent: 'magenta',
+    heading: "Right Now",
+    body: "Replace with what you are working on, learning, or exploring at the moment. This is the most immediate and human thing on the page — be specific and honest.",
+    year: "2025",
+    marker: "★",
+    accent: "magenta",
+    x: 47,
+    y: 80,
   },
   {
-    id: 'next',
+    id: "next",
     index: 6,
-    heading: 'Where I\'m Headed',
-    body: 'Replace with where you want to go — the kind of work you want to do, the kind of problems you want to solve, or the kind of collaborations you are looking for.',
-    year: '→',
-    marker: '▷',
-    side: 'right',
-    accent: 'amber',
+    heading: "Where I'm Headed",
+    body: "Replace with where you want to go — the kind of work you want to do, the kind of problems you want to solve, or the kind of collaborations you are looking for.",
+    year: "→",
+    marker: "▷",
+    accent: "amber",
+    x: 84,
+    y: 73,
   },
-]
+];
+
+const START = { x: 47, y: 94 }; // just below the gate — character's resting spot
 
 /* ─── Accent helpers ─────────────────────────────────────── */
 const ACCENT_COLOR = {
-  amber:      '#F5A94E',
-  turquoise:  '#4DD9C0',
-  magenta:    '#E0339E',
-}
+  amber: "#F5A94E",
+  turquoise: "#4DD9C0",
+  magenta: "#E0339E",
+};
 
 const ACCENT_BORDER = {
-  amber:      'rgba(245,169,78,0.25)',
-  turquoise:  'rgba(77,217,192,0.20)',
-  magenta:    'rgba(224,51,158,0.22)',
-}
+  amber: "rgba(245,169,78,0.35)",
+  turquoise: "rgba(77,217,192,0.30)",
+  magenta: "rgba(224,51,158,0.32)",
+};
 
 const ACCENT_BG = {
-  amber:      'rgba(245,169,78,0.05)',
-  turquoise:  'rgba(77,217,192,0.05)',
-  magenta:    'rgba(224,51,158,0.06)',
-}
+  amber: "rgba(245,169,78,0.08)",
+  turquoise: "rgba(77,217,192,0.08)",
+  magenta: "rgba(224,51,158,0.09)",
+};
 
 /* ─────────────────────────────────────────────
-   Single checkpoint card
+   Tiny pixel-art traveler (8x8 grid, hooded
+   figure + lantern glow). Swap for a sprite
+   image later if you want something richer.
 ───────────────────────────────────────────── */
-function CheckpointCard({ cp }: { cp: Checkpoint }) {
-  const color  = ACCENT_COLOR[cp.accent]
-  const border = ACCENT_BORDER[cp.accent]
-  const bg     = ACCENT_BG[cp.accent]
-  const isLeft = cp.side === 'left'
+function PixelCharacter() {
+  const cells = [
+    "00111000",
+    "01111100",
+    "01221030",
+    "01111033",
+    "00110003",
+    "00110000",
+    "01111000",
+    "11001100",
+  ];
+  const colors: Record<string, string> = {
+    "1": "#1A3B52",
+    "2": "#E9E4F2",
+    "3": "#F5A94E",
+  };
 
   return (
-    /* Outer row: 8-col grid for the zigzag */
-    <div className="grid-8 items-center gap-y-0 relative">
-
-      {/* ── Content block — left side ── */}
-      {isLeft && (
-        <div className="col-span-8 md:col-span-3 md:col-start-1 flex flex-col items-start md:items-end">
-          <CardContent cp={cp} border={border} bg={bg} align="right" />
-        </div>
+    <svg viewBox="0 0 8 8" width={28} height={28} shapeRendering="crispEdges">
+      {cells.map((row, y) =>
+        row
+          .split("")
+          .map((cell, x) =>
+            cell === "0" ? null : (
+              <rect key={`${x}-${y}`} x={x} y={y} width={1} height={1} fill={colors[cell]} />
+            )
+          )
       )}
-
-      {/* ── Center track + node ── */}
-      <div
-        className={`
-          hidden md:flex col-span-2
-          ${isLeft ? 'md:col-start-4' : 'md:col-start-4'}
-          flex-col items-center justify-center
-          relative py-4
-        `}
-        aria-hidden="true"
-      >
-        {/* Node */}
-        <div
-          className="
-            relative z-10
-            w-5 h-5
-            flex items-center justify-center
-            text-[0.65rem] font-bold
-            border-2
-          "
-          style={{
-            color,
-            borderColor: color,
-            backgroundColor: '#161C30',
-            boxShadow: `0 0 12px ${color}55`,
-          }}
-        >
-          {cp.marker}
-        </div>
-
-        {/* Track connector lines */}
-        <div
-          className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px"
-          style={{
-            background: `linear-gradient(to bottom, transparent, ${color}45, transparent)`,
-          }}
-        />
-      </div>
-
-      {/* ── Content block — right side ── */}
-      {!isLeft && (
-        <div className="col-span-8 md:col-span-3 md:col-start-6 flex flex-col items-start">
-          <CardContent cp={cp} border={border} bg={bg} align="left" />
-        </div>
-      )}
-
-      {/* Mobile: always full width below the marker */}
-      {isLeft && (
-        <div className="col-span-8 md:hidden">
-          <CardContent cp={cp} border={border} bg={bg} align="left" />
-        </div>
-      )}
-
-    </div>
-  )
-}
-
-/* ─────────────────────────────────────────────
-   Card content — the actual text block
-───────────────────────────────────────────── */
-function CardContent({
-  cp,
-  border,
-  bg,
-  align,
-}: {
-  cp: Checkpoint
-  border: string
-  bg: string
-  align: 'left' | 'right'
-}) {
-  return (
-    <div
-      className="
-        w-full max-w-[340px]
-        p-6
-        mb-8
-        border
-        transition-colors duration-300
-        hover:brightness-110
-      "
-      style={{
-        borderColor: border,
-        backgroundColor: bg,
-        textAlign: align === 'right' ? 'right' : 'left',
-      }}
-    >
-     
-
-      {/* Heading */}
-      <h3
-        className="text-display-md text-[#EDE8DC] mb-2 "
-        style={{ fontFamily: 'Namesake, serif' }}
-      >
-        {cp.heading}
-      </h3>
-
-      {/* Body */}
-      <p className="text-body text-[#8A96A8] leading-relaxed">
-        {cp.body}
-      </p>
-    </div>
-  )
+    </svg>
+  );
 }
 
 /* ─────────────────────────────────────────────
    About section
 ───────────────────────────────────────────── */
-const About = () => (
-  <section
-    id="about"
-    aria-labelledby="about-heading"
-    className="relative section-pad bg-[#161C30]"
-    style={{
-      background: 'linear-gradient(to bottom, #161C30 0%, #1a1f38 50%, #161C30 100%)',
-    }}
-  >
-    <div className="container-grid">
+const About = () => {
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const [popupId, setPopupId] = useState<string | null>(null);
+  const [visited, setVisited] = useState<Set<string>>(new Set());
 
-      {/* ── Section header ── */}
-      <div className="grid-8 mb-16">
-        <div className="col-span-8 flex flex-col gap-5">
+  const activePoint = checkpoints.find((p) => p.id === activeId);
+  const pos = activePoint ? { x: activePoint.x, y: activePoint.y } : START;
 
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-            <h2
-              id="about-heading"
-              className="text-display-xl text-[#EDE8DC]"
-              style={{ fontFamily: 'Namesake, serif' }}
-            >
-              The<br />Journey
-            </h2>
+  const visitedFraction =
+    checkpoints.length > 1 ? visited.size / (checkpoints.length - 1) : 0;
 
-            <p
-              className="text-gulzar-md text-[#8A96A8] max-w-[40ch] sm:text-right pb-1"
-              style={{ fontFamily: 'Gulzar, serif' }}
-            >
-              A map of the path so far —
-              origin, education, craft, and the road ahead.
-            </p>
+  function goTo(point: Checkpoint) {
+    setPopupId(null); // close whatever's open, let the character walk first
+    setActiveId(point.id);
+  }
+
+  function handleArrival() {
+    if (activeId) {
+      setPopupId(activeId);
+      setVisited((prev) => new Set(prev).add(activeId));
+    }
+  }
+
+  const currentIndex = checkpoints.findIndex((p) => p.id === activeId);
+  const nextPoint =
+    currentIndex >= 0 && currentIndex < checkpoints.length - 1
+      ? checkpoints[currentIndex + 1]
+      : null;
+
+  const popupPoint = checkpoints.find((p) => p.id === popupId);
+
+  // Dashed path connecting every checkpoint, in order.
+  const pathD = checkpoints
+    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
+    .join(" ");
+
+  return (
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="about-section relative section-pad"
+      style={{
+        backgroundImage: `linear-gradient(rgba(22, 28, 48, 0.58), rgba(22, 28, 48, 0.72)), url(${aboutMap})`,
+      }}
+    >
+      <div className="about-section__wash" aria-hidden="true" />
+      <div className="container-grid">
+        {/* ── Section header ── */}
+        <div className="grid-8 mb-12">
+          <div className="col-span-8 flex flex-col gap-5">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+              <h2
+                id="about-heading"
+                className="text-display-xl text-[#EDE8DC]"
+                style={{ fontFamily: "Namesake, serif" }}
+              >
+                The
+                <br />
+                Journey
+              </h2>
+
+              <p
+                className="text-gulzar-md text-[#8A96A8] max-w-[40ch] sm:text-right pb-1"
+                style={{ fontFamily: "Gulzar, serif" }}
+              >
+                A map of the path so far — origin, education, craft, and the road ahead.
+                Tap a landmark to follow it.
+              </p>
+            </div>
           </div>
-
         </div>
-      </div>
 
-      {/* ── Progression track ── */}
-      {/*
-        The track line is the CSS .timeline-track::before pseudo.
-        On desktop it sits at the center of the 8-col grid (col 4-5).
-        On mobile, content stacks vertically.
-      */}
-      <div className="timeline-track" role="list" aria-label="Journey checkpoints">
-
-        {/* Track start marker */}
+        {/* ── Map + character + pins ── */}
         <div
-          className="hidden md:flex items-center justify-center mb-2"
-          aria-hidden="true"
+          className="about-map relative w-full overflow-visible rounded-sm border border-[rgba(77,217,192,0.22)]"
+          aria-label="Interactive map of a personal journey"
         >
-          <div
-            className="
-              grid-8 w-full
-            "
+          <img
+            src={aboutMap}
+            alt="Pixel-art gothic map illustrating a personal journey"
+            className="pixelated pointer-events-none absolute inset-0 block h-full w-full select-none object-cover"
+            draggable={false}
+          />
+
+          {/* Dashed route */}
+          <svg
+            className="pointer-events-none absolute inset-0 h-full w-full"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
           >
-            <div className="col-span-2 col-start-4 flex justify-center">
-              <span className="text-label text-[#F5A94E]/40 tracking-[0.3em]">
-                START
-              </span>
-            </div>
-          </div>
+            <path
+              d={pathD}
+              fill="none"
+              stroke="rgba(156,152,179,0.35)"
+              strokeWidth={0.4}
+              strokeDasharray="1.2 1.2"
+              vectorEffect="non-scaling-stroke"
+            />
+            <motion.path
+              d={pathD}
+              fill="none"
+              stroke="#4DD9C0"
+              strokeWidth={0.4}
+              strokeDasharray="1.2 1.2"
+              vectorEffect="non-scaling-stroke"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: visitedFraction }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            />
+          </svg>
+
+          {/* Pinpoints */}
+          {checkpoints.map((cp) => {
+            const color = ACCENT_COLOR[cp.accent];
+            const isVisited = visited.has(cp.id);
+            const isActive = activeId === cp.id;
+
+            return (
+              <button
+                key={cp.id}
+                type="button"
+                aria-label={`View: ${cp.heading}`}
+                onClick={() => goTo(cp)}
+                className="absolute -translate-x-1/2 -translate-y-1/2 p-3"
+                style={{ left: `${cp.x}%`, top: `${cp.y}%` }}
+              >
+                <span
+                  className="
+                    relative flex items-center justify-center
+                    w-5 h-5 border-2 text-[0.6rem] font-bold
+                    transition-all duration-200
+                  "
+                  style={{
+                    color,
+                    borderColor: color,
+                    backgroundColor: "#161C30",
+                    boxShadow: isActive
+                      ? `0 0 0 6px ${color}33`
+                      : isVisited
+                      ? `0 0 10px ${color}88`
+                      : `0 0 6px ${color}55`,
+                    opacity: isVisited || isActive ? 1 : 0.75,
+                  }}
+                >
+                  {cp.marker}
+                </span>
+              </button>
+            );
+          })}
+
+          {/* Traveling character */}
+          <motion.div
+            className="pointer-events-none absolute -translate-x-1/2 -translate-y-full"
+            style={{ left: `${START.x}%`, top: `${START.y}%` }}
+            animate={{ left: `${pos.x}%`, top: `${pos.y}%` }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            onAnimationComplete={handleArrival}
+          >
+            <PixelCharacter />
+          </motion.div>
+
+          {/* Popup */}
+          <AnimatePresence>
+            {popupPoint && (
+              <motion.div
+                key={popupPoint.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                className="absolute z-20 w-[15rem] sm:w-[20rem] p-5 text-left"
+                style={{
+                  left: `${popupPoint.x}%`,
+                  top: `${popupPoint.y}%`,
+                  transform: `translate(${
+                    popupPoint.x > 55 ? "calc(-100% - 14px)" : "14px"
+                  }, ${popupPoint.y > 60 ? "calc(-100% - 14px)" : "14px"})`,
+                  backgroundColor: ACCENT_BG[popupPoint.accent],
+                  border: `1px solid ${ACCENT_BORDER[popupPoint.accent]}`,
+                  backdropFilter: "blur(6px)",
+                }}
+                role="dialog"
+              >
+                <button
+                  type="button"
+                  aria-label="Close"
+                  onClick={() => setPopupId(null)}
+                  className="absolute top-2 right-2 text-[#9C98B3] hover:text-[#EDE8DC] text-xs"
+                >
+                  ✕
+                </button>
+
+                {/* Index + year */}
+                <div className="flex items-center justify-between mb-2">
+                  <span
+                    className="text-label tracking-[0.2em]"
+                    style={{ color: ACCENT_COLOR[popupPoint.accent] }}
+                  >
+                    {String(popupPoint.index).padStart(2, "0")}
+                  </span>
+                  {popupPoint.year && (
+                    <span className="text-label text-[#8A96A8]">{popupPoint.year}</span>
+                  )}
+                </div>
+
+                <h3
+                  className="text-display-md text-[#EDE8DC] mb-2"
+                  style={{ fontFamily: "Namesake, serif" }}
+                >
+                  {popupPoint.heading}
+                </h3>
+
+                <p className="text-body-sm text-[#C4BCAA] leading-relaxed mb-3">
+                  {popupPoint.body}
+                </p>
+
+                {nextPoint && popupPoint.id === activeId && (
+                  <button
+                    type="button"
+                    onClick={() => goTo(nextPoint)}
+                    className="text-body-sm transition-colors"
+                    style={{ color: ACCENT_COLOR[popupPoint.accent] }}
+                  >
+                    Continue the journey →
+                  </button>
+                )}
+
+                {/* Corner brackets */}
+                <span
+                  className="absolute top-[6px] left-[6px] w-[8px] h-[8px] border-t border-l"
+                  style={{ borderColor: ACCENT_BORDER[popupPoint.accent] }}
+                />
+                <span
+                  className="absolute bottom-[6px] right-[6px] w-[8px] h-[8px] border-b border-r"
+                  style={{ borderColor: ACCENT_BORDER[popupPoint.accent] }}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
-        {checkpoints.map((cp) => (
-          <div role="listitem" key={cp.id}>
-            <CheckpointCard cp={cp} />
-          </div>
-        ))}
-
-        {/* Track end marker */}
-        <div
-          className="hidden md:flex items-center justify-center mt-2"
-          aria-hidden="true"
-        >
-          <div className="grid-8 w-full">
-            <div className="col-span-2 col-start-4 flex justify-center">
-              <span className="text-label text-[#8A96A8]/40 tracking-[0.3em]">
-                ∞
-              </span>
-            </div>
-          </div>
+        {/* ── CTA ── */}
+        <div className="flex justify-center mt-16">
+          <a href="#contact" className="btn-ghost">
+            Start a conversation
+          </a>
         </div>
-
       </div>
+    </section>
+  );
+};
 
-      {/* ── CTA ── */}
-      <div className="flex justify-center mt-16">
-        <a href="#contact" className="btn-ghost">
-          Start a conversation
-        </a>
-      </div>
-
-    </div>
-
-  </section>
-)
-
-export default About
+export default About;
