@@ -810,6 +810,7 @@ body {
 .knowledge-item {
   background-color: #161C30;
   padding: 1.125rem 1.25rem;
+  will-change: opacity, transform;
   transition: background-color var(--transition-base);
 }
 

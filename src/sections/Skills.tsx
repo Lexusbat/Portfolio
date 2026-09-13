@@ -1,6 +1,6 @@
 // sections/Skills.tsx
 // Core lab hover interaction PRESERVED — only visual integration improved.
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { useState } from 'react'
 import labBg from '../assets/images/lab-bg.webp'
 import { labObjects, type LabObject } from '../data/skills'
@@ -25,7 +25,7 @@ interface KnowledgeGroup {
 }
 
 // Wave: each item's animation starts slightly after the one before it
-const groupVariants = {
+const groupVariants: Variants = {
   hidden: {},
   show: {
     transition: {
@@ -34,7 +34,7 @@ const groupVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 14 },
   show: {
     opacity: 1,
@@ -110,8 +110,8 @@ function KnowledgeArchive() {
   key={group.category}
   variants={groupVariants}
   initial="hidden"
-  animate="show"      // ← changed from whileInView
-  // viewport={{ once: true, amount: 0.3 }}   // ← comment out
+  whileInView="show"
+  viewport={{ once: true, amount: 0.25 }}
 >
       {/* Category label */}
       <p className="text-label text-[#4DD9C0] mb-4 pb-2 border-b border-[rgba(77,217,192,0.15)]">
@@ -128,7 +128,7 @@ function KnowledgeArchive() {
               knowledge-item group/item
               flex items-start justify-between gap-3
               border-l-[2px]
-              transition-all duration-200
+              transition-colors duration-200
               min-w-[160px]
             "
           >
