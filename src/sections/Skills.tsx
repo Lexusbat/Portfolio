@@ -1,6 +1,6 @@
 // sections/Skills.tsx
 // Core lab hover interaction PRESERVED — only visual integration improved.
-
+import { motion } from "framer-motion";
 import { useState } from 'react'
 import labBg from '../assets/images/lab-bg.webp'
 import { labObjects, type LabObject } from '../data/skills'
@@ -24,17 +24,24 @@ interface KnowledgeGroup {
   items: KnowledgeEntry[]
 }
 
-const TIER_COLOR: Record<KnowledgeTier, string> = {
-  'Experienced': '#F5A94E',
-  'Familiar':    '#4DD9C0',
-  'Exploring':   '#8A96A8',
-}
+// Wave: each item's animation starts slightly after the one before it
+const groupVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08, // delay between each item — this IS the wave speed
+    },
+  },
+};
 
-const TIER_DOT: Record<KnowledgeTier, string> = {
-  'Experienced': '◆',
-  'Familiar':    '◇',
-  'Exploring':   '·',
-}
+const itemVariants = {
+  hidden: { opacity: 0, y: 14 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+};
 
 const knowledgeArchive: KnowledgeGroup[] = [
   {
@@ -92,60 +99,55 @@ function KnowledgeArchive() {
           honestly by depth of familiarity.
         </p>
 
-        {/* Tier legend */}
-        <div className="flex flex-wrap gap-5 mt-1">
-          {(['Experienced', 'Familiar', 'Exploring'] as KnowledgeTier[]).map((tier) => (
-            <span key={tier} className="flex items-center gap-1.5 text-body-sm">
-              <span style={{ color: TIER_COLOR[tier] }} aria-hidden="true">
-                {TIER_DOT[tier]}
-              </span>
-              <span style={{ color: TIER_COLOR[tier] }}>{tier}</span>
-            </span>
-          ))}
-        </div>
+      
+       
       </div>
 
       {/* Groups */}
-      <div className="grid-8 gap-y-10">
-        {knowledgeArchive.map((group) => (
-          <div
-            key={group.category}
-            className="col-span-8 sm:col-span-4 lg:col-span-2"
-          >
-            {/* Category label */}
-            <p className="text-label text-[#4DD9C0] mb-4 pb-2 border-b border-[rgba(77,217,192,0.15)]">
-              {group.category}
-            </p>
+      <div className="flex flex-col gap-12">
+  {knowledgeArchive.map((group) => (
+  <motion.div
+  key={group.category}
+  variants={groupVariants}
+  initial="hidden"
+  animate="show"      // ← changed from whileInView
+  // viewport={{ once: true, amount: 0.3 }}   // ← comment out
+>
+      {/* Category label */}
+      <p className="text-label text-[#4DD9C0] mb-4 pb-2 border-b border-[rgba(77,217,192,0.15)]">
+        {group.category}
+      </p>
 
-            <ul className="flex flex-col gap-3" role="list">
-              {group.items.map((item) => (
-                <li
-                  key={item.name}
-                  className="
-                    knowledge-item group/item
-                    flex items-start justify-between gap-3
-                    border-l-[2px]
-                    transition-all duration-200
-                  "
-                  
-                >
-                  <div className="flex flex-col gap-0.5 min-w-0">
-                    <span className="text-body-sm text-[#EDE8DC] font-medium">
-                      {item.name}
-                    </span>
-                    {item.note && (
-                      <span className="text-body-sm text-[#8A96A8] text-[0.75rem] leading-snug">
-                        {item.note}
-                      </span>
-                    )}
-                  </div>
-                  
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* Sub-groups in a line */}
+      <ul className="flex flex-row flex-wrap gap-3" role="list">
+        {group.items.map((item) => (
+          <motion.li
+            key={item.name}
+            variants={itemVariants}
+            className="
+              knowledge-item group/item
+              flex items-start justify-between gap-3
+              border-l-[2px]
+              transition-all duration-200
+              min-w-[160px]
+            "
+          >
+            <div className="flex flex-col gap-0.5 min-w-0">
+              <span className="text-body-sm text-[#EDE8DC] font-medium">
+                {item.name}
+              </span>
+              {item.note && (
+                <span className="text-body-sm text-[#8A96A8] text-[0.75rem] leading-snug">
+                  {item.note}
+                </span>
+              )}
+            </div>
+          </motion.li>
         ))}
-      </div>
+      </ul>
+    </motion.div>
+  ))}
+</div>
     </div>
   )
 }
